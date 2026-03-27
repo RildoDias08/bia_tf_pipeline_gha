@@ -24,4 +24,5 @@ resource "aws_db_instance" "bia_db" {
   tags = {
     Name = "bia-db"
   }
+  
 }
