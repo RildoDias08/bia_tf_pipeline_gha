@@ -37,3 +37,4 @@ resource "aws_iam_role_policy_attachment" "role_ssm" {
   role      = aws_iam_role.role_ec2.name
   policy_arn = aws_iam_policy.get_secret_biadb.arn
 }
+
