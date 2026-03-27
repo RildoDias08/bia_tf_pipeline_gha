@@ -42,15 +42,6 @@ jobs:
           docker build -f bia/Dockerfile -t "$ECR_URI:latest" bia
           docker push "$ECR_URI:latest"
 
-      - name: Run migrations
-        run: |
-          ECR_URI="${{ steps.aws.outputs.account_id }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ECR_REPOSITORY }}"
-
-          docker run --rm \
-            -e DATABASE_URL="${{ secrets.DB_HOST }}" \
-            "$ECR_URI:latest" \
-            npx sequelize db:migrate
-      
       - name: Update ECS service
         run: |
           aws ecs update-service \
