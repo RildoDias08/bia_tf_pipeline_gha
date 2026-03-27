@@ -30,3 +30,4 @@ fi
 
 swapon /swapfile || true
 grep -q swapfile /etc/fstab || echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
+
