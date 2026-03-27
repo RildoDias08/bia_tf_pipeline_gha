@@ -50,6 +50,7 @@ resource "aws_vpc_security_group_ingress_rule" "sg_alb" {
   to_port = each.value.port
   ip_protocol = "tcp"
   cidr_ipv4 = "0.0.0.0/0"
+  
 }
 
 resource "aws_vpc_security_group_egress_rule" "sg_alb" {
