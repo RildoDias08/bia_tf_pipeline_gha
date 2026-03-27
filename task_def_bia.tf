@@ -2,6 +2,7 @@ resource "aws_ecs_task_definition" "bia" {
   family = "task-def-bia"
   network_mode = "bridge"
   task_role_arn = aws_iam_role.ecs_task_role.arn
+  
   container_definitions = jsonencode([
     {
       name = "bia",
