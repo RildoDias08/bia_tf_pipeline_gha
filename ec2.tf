@@ -36,5 +36,4 @@ resource "aws_instance" "bia_dev" {
   tags = {
     Name = "bia-dev"
   }
-
 }
