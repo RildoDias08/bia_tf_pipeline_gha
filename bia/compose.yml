@@ -13,7 +13,7 @@ services:
       DB_PORT: 5432
       ## NAO PRECISA NO BOOTCAMP DAQUI PRA BAIXO ##
       DB_SECRET_NAME: "${SECRET_NAME}"
-      DB_REGION: us-east-1
+      DB_REGION: us-east-1 
       # AWS_ACCESS_KEY_ID: 
       # AWS_SECRET_ACCESS_KEY:
       # DEBUG_SECRET: 
