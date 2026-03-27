@@ -9,3 +9,4 @@ terraform.tfstate.backup
 *.tfvars.json
 *.tfstate
 *.tfstate.backup
+bia/.env
