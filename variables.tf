@@ -17,3 +17,4 @@ variable "subnets_private" {
     public = bool
   }))
 }
+
