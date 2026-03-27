@@ -2,6 +2,7 @@ resource "aws_lb" "bia_alb" {
   name               = "bia-alb"
   internal           = false
   load_balancer_type = "application"
+  
   security_groups    = [aws_security_group.alb.id]
   subnets            = values(aws_subnet.public)[*].id
 
