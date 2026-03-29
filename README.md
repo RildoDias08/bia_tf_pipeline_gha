@@ -71,7 +71,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-  A[Push na main ou workflow_dispatch] --> B[actions/checkout]
+  A[Push na main] --> B[actions/checkout]
   B --> C[configure-aws-credentials via OIDC]
   C --> D[aws sts get-caller-identity]
   D --> E[amazon-ecr-login]
