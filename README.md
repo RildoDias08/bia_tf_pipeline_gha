@@ -196,3 +196,4 @@ docker compose exec server bash -c 'npx sequelize db:migrate'
 - Configurar backend remoto do Terraform
 - Adicionar ambientes (`dev`, `stg`, `prod`) com `workspaces` ou separação por diretórios
 - Versionar imagem por commit SHA no pipeline
+
