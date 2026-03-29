@@ -17,6 +17,70 @@ Este repositório provisiona:
 - IAM Roles/Policies para EC2, ECS e tasks
 - EC2 de apoio/desenvolvimento (`bia-dev`) com `user_data` para instalar Docker e Compose
 
+## Diagrama Mermaid
+
+```mermaid
+flowchart LR
+  user[Usuario/Browser]
+
+  subgraph gh[GitHub]
+    repo[Repositorio]
+    gha[GitHub Actions deploy_ecs.yml]
+  end
+
+  subgraph aws[AWS us-east-1]
+    iam[IAM Role OIDC]
+    ecr[ECR bia-repo]
+    ecs[ECS Cluster cluster-bia]
+    cp[Capacity Provider]
+    asg[Auto Scaling Group ecs-asg]
+    ec2[EC2 ECS Hosts t3.micro]
+    svc[ECS Service service-bia]
+    task[Task Definition task-def-bia]
+    app[Container bia :8080]
+    alb[ALB bia-alb 80/443]
+    tg[Target Group tg-bia :3001]
+    rds[RDS PostgreSQL bia-postgres-db]
+    sm[Secrets Manager master user secret]
+    cw[CloudWatch Logs /ecs/bia]
+  end
+
+  repo --> gha
+  gha -->|OIDC assume role| iam
+  gha -->|docker build/push :latest| ecr
+  gha -->|aws ecs update-service --force-new-deployment| svc
+
+  user -->|HTTPS| alb
+  alb --> tg
+  tg --> ec2
+  ec2 --> ecs
+  ecs --> cp
+  cp --> asg
+  asg --> ec2
+
+  svc --> task
+  task -->|image| ecr
+  svc --> app
+  app -->|DB_HOST| rds
+  app -->|DB_SECRET_NAME| sm
+  rds --> sm
+  app --> cw
+```
+
+### Pipeline (detalhado)
+
+```mermaid
+flowchart TD
+  A[Push na main ou workflow_dispatch] --> B[actions/checkout]
+  B --> C[configure-aws-credentials via OIDC]
+  C --> D[aws sts get-caller-identity]
+  D --> E[amazon-ecr-login]
+  E --> F[docker build -f bia/Dockerfile]
+  F --> G[docker push ECR :latest]
+  G --> H[aws ecs update-service --force-new-deployment]
+  H --> I[aws ecs wait services-stable]
+```
+
 ## Estrutura principal
 
 - `main.tf`: rede base (VPC, subnets, rotas, DB subnet group)
