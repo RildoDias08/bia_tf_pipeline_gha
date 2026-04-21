@@ -1,5 +1,3 @@
-# bia_tf_pipeline_gha
-
 Infraestrutura como código com Terraform para executar a aplicação `bia` em AWS (ECS em EC2), com deploy contínuo via GitHub Actions (OIDC + ECR + atualização do serviço ECS).
 
 ## Visão geral
