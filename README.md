@@ -7,7 +7,7 @@ Infraestrutura como código com Terraform para executar a aplicação `bia` em A
 Este repositório provisiona:
 
 - VPC com subnets públicas e privadas em `us-east-1`
-- Internet Gateway e route tables
+- Internet Gateway e route tables 
 - ALB com listener HTTP (redireciona para HTTPS) e listener HTTPS com certificado ACM
 - ECS Cluster (`cluster-bia`) com Capacity Provider ligado a Auto Scaling Group EC2
 - Task Definition e ECS Service (`service-bia`) com 2 tarefas
@@ -107,7 +107,6 @@ Na raiz do projeto:
 
 ```bash
 terraform init
-terraform fmt -recursive
 terraform validate
 terraform plan 
 terraform apply
